@@ -39,5 +39,3 @@ class Respond
 	end
  
 end
-
-#puts Respond.new.to_s

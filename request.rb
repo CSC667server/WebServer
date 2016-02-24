@@ -23,7 +23,7 @@ class Request
 		extract_headers(headers)
 
 		# print component to console (remove later)
-		puts "\n\nmethod: #{@method}"
+		puts "method: #{@method}"
 		puts "identifier: #{@identifier}"
 		puts "query: #{@query}"
 		puts "version: #{@version}"
@@ -31,6 +31,8 @@ class Request
 		puts @headers
 		puts "---------------- body -------------------"
 		puts @body
+
+		return self
 	end
 
 	# parse request-line
