@@ -72,28 +72,3 @@ class Request
 		@stream.split("\n\n")[0].split("\n", 2)[1]
 	end
 end
-
-request_str = "GET / HTTP/1.1
-Host: localhost:5555
-User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-US,en;q=0.5
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-Cache-Control: max-age=0\n\nbody: bla bla bla"
-
-#Request.new(request_str).parse
-
-#request = Request.new
-#puts request_str
-#request.extract_request_line(request_str)
-
-#request.parse(request_str)
-
-#puts "\n\nmethod: #{request.method}"
-#puts "identifier: #{request.identifier}"
-#puts "version: #{request.version}"
-
-
-#test = {}
-#puts test.class
