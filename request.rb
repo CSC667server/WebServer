@@ -3,14 +3,9 @@ class Request
 	attr_accessor :stream, :method, :identifier, :query
 	attr_accessor :version, :header, :body
 
-	def initialize(stream)
-		@stream = stream
-		@method = ""
-		@identifier = ""
-		@query = ""
-		@version = ""
+	def initialize(socket)
+		@stream = socket_to_s(socket)
 		@headers = {}
-		@body = ""
 	end
 
 	def parse()
@@ -24,7 +19,12 @@ class Request
 		extract_request_line(request_line)
 		extract_headers(headers)
 
-		# print component to console (remove later)
+		# show info in console
+		display_info_to_console
+	end
+
+	# print component to console (remove later)
+	def display_info_to_console()
 		puts "method: #{@method}"
 		puts "identifier: #{@identifier}"
 		puts "query: #{@query}"
@@ -33,8 +33,6 @@ class Request
 		puts @headers
 		puts "---------------- body -------------------"
 		puts @body
-
-		return self
 	end
 
 	# parse request-line
@@ -74,5 +72,13 @@ class Request
 	# breaks and return headers from stream
 	def seperate_headers()
 		@stream.split("\n\n")[0].split("\n", 2)[1]
+	end
+
+	def socket_to_s(socket)
+		stream = ""
+		while (line = socket.gets) != "\r\n"
+				stream += line
+		end
+		return stream
 	end
 end
