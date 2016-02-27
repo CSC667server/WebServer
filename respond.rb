@@ -4,15 +4,13 @@ require './request.rb'
 class Respond
 	
 	attr_accessor :version, :status_code, :reason_phrase
-	attr_accessor :headers, :body, :request
-
-	def initialize(request)
+	attr_accessor :headers, :body
+	def initialize()
 		@version = ""
 		@status_code = ""
 		@reason_phrase = ""
 		@headers = {}
 		@body = ""
-		@request = request
 	end
 
 	# return respond as a string
@@ -30,8 +28,7 @@ class Respond
 
 	# create an example respond
 	def use_example()
-		@body = "This is body with some payload.\n"
-		@body += "below is client's request:\n\n#{@request.stream}"
+		@body = "This is the body of the respond from the server.\n"
 		@version = "HTTP/1.1"
 		@status_code = "200"
 		@reason_phrase = "OK"
