@@ -1,7 +1,6 @@
 class Request
 
-	attr_accessor :stream
-	attr_accessor :method, :identifier, :query
+	attr_accessor :stream, :method, :identifier, :query
 	attr_accessor :version, :header, :body
 
 	def initialize(stream)
@@ -15,10 +14,13 @@ class Request
 	end
 
 	def parse()
+
+		# break stream into 3 parts
 		request_line = seperate_request_line
 		headers = seperate_headers
 		@body = seperate_body
 
+		# parsing each parts
 		extract_request_line(request_line)
 		extract_headers(headers)
 

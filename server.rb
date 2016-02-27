@@ -6,7 +6,7 @@ class Server
 
 	attr_accessor :host, :port, :socket
 
-	def initialize(host, port=4444)
+	def initialize(host, port=7777)
 		@socket = TCPServer.new(host, port) 
 	end
 
@@ -22,10 +22,9 @@ class Server
 			end
 			
 			request = Request.new(stream).parse
-			respond = Respond.new(request).to_s
+			respond_str = Respond.new(request).to_s
 
-			client.print respond
-
+			client.print respond_str
 			client.close
 			puts "\nclosed connection\n"
 		end
