@@ -20,11 +20,11 @@ class Request
 		extract_headers(headers)
 
 		# show info in console
-		display_info_to_console
+		display
 	end
 
 	# print component to console (remove later)
-	def display_info_to_console()
+	def display()
 		puts "method: #{@method}"
 		puts "identifier: #{@identifier}"
 		puts "query: #{@query}"
