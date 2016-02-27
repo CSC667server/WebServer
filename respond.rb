@@ -15,7 +15,9 @@ class Respond
 		@request = request
 	end
 
-	def to_s() 
+	# return respond as a string
+	def to_s()
+		#using example for testing 
 		use_example
 
 		status_line = "#{@version} #{@status_code} #{@reason_phrase}\n"
@@ -26,6 +28,7 @@ class Respond
 		status_line += "\n#{body}\n"
 	end
 
+	# create an example respond
 	def use_example()
 		@body = "This is body with some payload.\n"
 		@body += "below is client's request:\n\n#{@request.stream}"
