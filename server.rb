@@ -16,15 +16,17 @@ class Server
 			client = socket.accept
 			puts "\naccepted connection\n\n"
 			
-			stream = ""
-			while (line = client.gets) != "\r\n"
-				stream += line
-			end
-			
-			request = Request.new(stream).parse
-			respond_str = Respond.new(request).to_s
+			#
+			#stream = ""
+			#while (line = client.gets) != "\r\n"
+			#	stream += line
+			#end
 
-			client.print respond_str
+			#puts stream
+
+			Request.new(client).parse
+
+			client.print Respond.new().to_s
 			client.close
 			puts "\nclosed connection\n"
 		end
