@@ -30,13 +30,8 @@ class Server
 		httpd_file_path = "./config/httpd.conf"
 		mime_file_path = "./config/mime.types"
 
-		@httpd_config = HttpdConfig.new(read_config_file(httpd_file_path)).load
-		@mime_types = MimeTypes.new(read_config_file(mime_file_path)).load
-
-		#@httpd_config.show_config
-		#@mime_types.show_config
-
-		puts @mime_types.for("tsv")
+		HttpdConfig.new(read_config_file(httpd_file_path)).load
+		MimeTypes.new(read_config_file(mime_file_path)).load
 
 		return self
 	end
