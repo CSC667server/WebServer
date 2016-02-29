@@ -1,11 +1,12 @@
 require 'socket'
 require './request.rb'
 require './respond.rb'
-require './configFile.rb'
+require './httpdConfig.rb'
+require './mimeTypes.rb'
 
 class Server
 
-	attr_accessor :socket, :httpd_config, :mime_type
+	attr_accessor :socket, :httpd_config, :mime_types
 
 	def initialize(host, port=7777)
 		@socket = TCPServer.new(host, port) 
@@ -26,8 +27,16 @@ class Server
 	end
 
 	def config()
+		httpd_file_path = "./config/httpd.conf"
+		mime_file_path = "./config/mime.types"
 
-		#TO DO
+		@httpd_config = HttpdConfig.new(read_config_file(httpd_file_path)).load
+		@mime_types = MimeTypes.new(read_config_file(mime_file_path)).load
+
+		#@httpd_config.show_config
+		#@mime_types.show_config
+
+		puts @mime_types.for("tsv")
 
 		return self
 	end
