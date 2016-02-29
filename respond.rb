@@ -5,6 +5,7 @@ class Respond
 	
 	attr_accessor :version, :status_code, :reason_phrase
 	attr_accessor :headers, :body
+
 	def initialize()
 		@version = ""
 		@status_code = ""
@@ -37,5 +38,4 @@ class Respond
 		@headers.store("Content-Type", "text")
 		@headers.store("Content-Length", "#{@body.bytesize}")
 	end
- 
 end
