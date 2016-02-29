@@ -9,12 +9,10 @@ class HttpdConfig < ConfigFile
 	end
 
 	def load()
-		@config = process_lines
+		@config = super
+
+		# store corresponding config to instance variable
+
 		return self
 	end
 end
-
-
-lines = ["Listen 7777","ServerName localhost:7777"]
-
-#puts HttpdConfig.new(lines).load
