@@ -9,33 +9,21 @@ class MimeTypes < ConfigFile
 	end
 
 	def load()
-		@config = process_lines
+		@config = super
+
+		# store corresponding config to instance variable
+
 		return self
 	end
 
 	def for(ext)
-		return @config[ext]
+		
+		@config.each_value do |all_ext|
+			if all_ext.include? ext
+				return @config.key(all_ext)
+			end
+		end
+
+		return ext + " format is currently not supported."
 	end
-
 end
-
-#mime_file = File.open("./config/mime.types", "r")
-#puts mime_file.read.class
-
-def read_config_file(file_path)
-	lines = []
-
-	file = File.open(file_path, "r")
-
-	file.readlines.each do |line|
-		lines.push(line)
-	end
-
-	file.close
-
-	return lines
-end
-
-file = read_config_file("./config/mime.types")
-
-puts MimeTypes.new(file).load.for(".avi")
