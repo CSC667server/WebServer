@@ -9,7 +9,7 @@ class ConfigFile
 
 	# filter and store lines to @directives
 	# returns @directives hash
-	def process_lines()
+	def load()
 		@lines.each do |line|
 			if line.length != 0 and line[0] != "#" and line[0] != "\n"
 				directive, argument = line.split(" ", 2)
@@ -28,5 +28,4 @@ class ConfigFile
 
 		return self
 	end
-
 end
