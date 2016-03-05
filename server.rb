@@ -1,8 +1,8 @@
 require 'socket'
-require './request.rb'
-require './respond.rb'
-require './httpdConfig.rb'
-require './mimeTypes.rb'
+require './http/request.rb'
+require './http/respond.rb'
+require './http/httpdConfig.rb'
+require './http/mimeTypes.rb'
 
 class Server
 

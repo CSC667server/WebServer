@@ -1,4 +1,4 @@
-require './configFile.rb'
+require './http/configFile.rb'
 
 class MimeTypes < ConfigFile
 
