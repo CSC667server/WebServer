@@ -1,5 +1,3 @@
-#require 'uri'
-
 class Resource
 	attr_reader :uri, :httpd_conf, :mime_types, :path
 
@@ -41,5 +39,10 @@ class Resource
 
 		return mime_types.for(ext) 
 	end
-end
 
+	def script?
+
+	end
+
+
+end
