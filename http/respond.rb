@@ -29,10 +29,10 @@ class Respond
 
 	# create an example respond
 	def use_example()
-		@body = "This is the body of the respond from the server.\n"
+		#@body = "This is the body of the respond from the server.\n"
 		@version = "HTTP/1.1"
-		@status_code = "200"
-		@reason_phrase = "OK"
+		@status_code = "500"
+		@reason_phrase = "Internal Server Error"
 		@headers.store("Date", "#{Time.now.strftime("%d/%m/%Y")}")
 		@headers.store("Server", "The best one")
 		@headers.store("Content-Type", "text")

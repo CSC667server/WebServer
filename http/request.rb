@@ -1,7 +1,7 @@
 class Request
 
-	attr_accessor :stream, :method, :identifier, :query
-	attr_accessor :version, :header, :body
+	attr_reader :stream, :method, :identifier, :query
+	attr_reader :version, :header, :body
 
 	def initialize(socket)
 		@stream = socket_to_s(socket)

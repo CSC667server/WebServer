@@ -1,40 +1,45 @@
-require './request.rb'
+#require 'uri'
+
 class Resource
-	attr_accessor :request, :conf, :mims, :resolved_path, :final_uri
+	attr_reader :uri, :httpd_conf, :mime_types, :path
 
-	def initialize(request, httpd_conf, mimes)
-		@request = request
-		@path = request.identifier.dup
-		@conf = httpd_conf
-		@mimes = mimes
-		@resolved_path = ""
-		@final_uri = nil
+	def initialize(uri, httpd_conf, mime_types)
+		@uri = uri
+		@httpd_conf = httpd_conf
+		@mime_types = mime_types
+	end
 
-	end
-	
-	def full_uri
-		@final_uri ||= begin
-			whole_path = File.join(@conf.document_root, @path)
-			if File.file?(whole_path) || @request.method == "PUT" || @request.method == "DELETE"
-				@request.identifier
-			else
-				File.join(@path. @conf.directory_index)
-			end
-		end
-		@final_uri
-	end
-	
 	def resolve
-		full_uri
-		if !script_aliased? && !aliased?
-			@resolved_path = File.join(@conf.document_root, @final_uri)
+		if uri == httpd_conf.script_alias.split(" ", 2)[0]
+			@path = httpd_conf.script_alias.split(" ", 2)[1]
+		elsif uri == httpd_conf.alias.split(" ", 2)[0]
+			@path = httpd_conf.alias.split(" ", 2)[1]
+		elsif uri == "/"
+			@path = "index.html"
+		else
+			@path = uri
 		end
-		if 
-	end
-	
-	def create_resource
+
+		if path.end_with?("/")
+			@path += "index.html"
+		end
+
+		@path = httpd_conf.document_root + @path
 		
+		return self
 	end
-	
-	
-end	
+
+	def mime_type
+		if uri.include?(".")
+			ext = uri
+		else
+			resolve
+			ext = @path
+		end
+
+		ext = ext.split(".", 2).last
+
+		return mime_types.for(ext) 
+	end
+end
+

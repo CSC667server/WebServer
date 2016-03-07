@@ -24,6 +24,6 @@ class MimeTypes < ConfigFile
 			end
 		end
 
-		return ext + " format is currently not supported."
+		return "application/octet-stream"
 	end
 end

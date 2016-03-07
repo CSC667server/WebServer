@@ -3,12 +3,13 @@ require './http/request.rb'
 require './http/respond.rb'
 require './http/httpdConfig.rb'
 require './http/mimeTypes.rb'
+require './http/resource.rb'
 
 class Server
 
-	attr_accessor :socket, :httpd_config, :mime_types
+	attr_reader :socket, :httpd_config, :mime_types
 
-	def initialize(host, port=7777)
+	def initialize(host="localhost", port=7777)
 		@socket = TCPServer.new(host, port) 
 	end
 
@@ -30,8 +31,15 @@ class Server
 		httpd_file_path = "./config/httpd.conf"
 		mime_file_path = "./config/mime.types"
 
-		HttpdConfig.new(read_config_file(httpd_file_path)).load
-		MimeTypes.new(read_config_file(mime_file_path)).load
+		#HttpdConfig.new(read_config_file(httpd_file_path)).load.show_member
+		#MimeTypes.new(read_config_file(mime_file_path)).load
+
+
+		@http_config = HttpdConfig.new(read_config_file(httpd_file_path)).load
+		@mime_types = MimeTypes.new(read_config_file(mime_file_path)).load
+		resource = Resource.new("ab/", @http_config, @mime_types).resolve
+		puts resource.path
+		puts resource.mime_type
 
 		return self
 	end
@@ -51,4 +59,5 @@ class Server
 	end
 end
 	
-Server.new('localhost').start
+#Server.new.start
+Server.new.config

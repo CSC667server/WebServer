@@ -13,7 +13,7 @@ class ConfigFile
 		@lines.each do |line|
 			if line.length != 0 and line[0] != "#" and line[0] != "\n"
 				directive, argument = line.split(" ", 2)
-				@directives.store(directive, argument.chomp)
+				@directives.store(directive, argument.chomp.tr("\"", ""))
 			end
 		end
 
